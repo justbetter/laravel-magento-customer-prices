@@ -13,7 +13,7 @@ This package can:
 - Automatically stop syncing when updating fails
 - Logs activities using [Spatie activitylog](https://github.com/spatie/laravel-activitylog)
 - Logs errors using [JustBetter Error Logger](https://github.com/justbetter/laravel-error-logger)
-- Checks if Magento products exist using [JustBetter Magento Products](https://bitbucket.org/just-better/laravel-magento-products)
+- Checks if Magento products exist using [JustBetter Magento Products](https://github.com/justbetter/laravel-magento-products)
 
 ## Installation
 
@@ -40,17 +40,16 @@ Add the following commands to your scheduler:
 ```php
 <?php
 
-    protected function schedule(Schedule $schedule): void
-    {
-        $schedule->command(\JustBetter\MagentoCustomerPrices\Commands\SyncCustomerPricesCommand::class)->everyMinute();
+protected function schedule(Schedule $schedule): void
+{
+    $schedule->command(\JustBetter\MagentoCustomerPrices\Commands\SyncCustomerPricesCommand::class)->everyMinute();
 
-        // Retrieve all customer prices weekly
-        $schedule->command(\JustBetter\MagentoCustomerPrices\Commands\RetrieveAllCustomerPricesCommand::class)->weekly();
+    // Retrieve all customer prices weekly
+    $schedule->command(\JustBetter\MagentoCustomerPrices\Commands\RetrieveAllCustomerPricesCommand::class)->weekly();
 
-        // Retrieve updated customer prices daily
-        $schedule->command(\JustBetter\MagentoCustomerPrices\Commands\RetrieveUpdatedCustomerPricesCommand::class)->daily();
-    }
-
+    // Retrieve updated customer prices daily
+    $schedule->command(\JustBetter\MagentoCustomerPrices\Commands\RetrieveUpdatedCustomerPricesCommand::class)->daily();
+}
 ```
 
 ### Retrieving Customer Prices
@@ -82,6 +81,8 @@ See `\JustBetter\MagentoCustomerPrices\Actions\UpdateMageplazaCustomerPrices` fo
 
 Don't forget to bind your own class!
 ```
+<?php
+
 app()->singleton(UpdatesMagentoCustomerPrices::class, YourCustomUpdater::class);
 ```
 

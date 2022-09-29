@@ -11,7 +11,7 @@ class RetrieveAllCustomerPriceSkus implements RetrievesAllCustomerPriceSkus
     public function retrieve(): Enumerable
     {
         /** @var CustomerPriceRetriever $retriever */
-        $retriever = app(config('laravel-magento-customer-prices.retriever'));
+        $retriever = app(config('magento-customer-prices.retriever'));
 
         return $retriever->retrieveAllSkus();
     }

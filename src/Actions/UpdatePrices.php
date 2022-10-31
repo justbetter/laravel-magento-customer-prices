@@ -28,7 +28,7 @@ class UpdatePrices implements UpdatesPrices
                 ->performedOn($model)
                 ->log('Product does not exist in Magento');
 
-            $model->update(['sync' => false]);
+            $model->update(['sync' => false, 'state' => MagentoCustomerPrice::STATE_IDLE]);
 
             return;
         }

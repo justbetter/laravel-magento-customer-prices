@@ -11,11 +11,15 @@ class RunCustomerPriceSync implements RunsCustomerPriceSync
 {
     public function sync(): void
     {
-        MagentoCustomerPrice::where('state', MagentoCustomerPrice::STATE_RETRIEVE)
+        MagentoCustomerPrice::query()
+            ->where('sync', '=', true)
+            ->where('state', '=', MagentoCustomerPrice::STATE_RETRIEVE)
             ->select(['sku'])
             ->each(fn (MagentoCustomerPrice $price) => RetrieveCustomerPriceJob::dispatch($price->sku));
 
-        MagentoCustomerPrice::where('state', MagentoCustomerPrice::STATE_UPDATE)
+        MagentoCustomerPrice::query()
+            ->where('sync', '=', true)
+            ->where('state', '=', MagentoCustomerPrice::STATE_UPDATE)
             ->select(['sku'])
             ->each(fn (MagentoCustomerPrice $price) => UpdateCustomerPriceJob::dispatch($price->sku));
     }

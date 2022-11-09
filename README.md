@@ -1,5 +1,12 @@
 # Laravel Magento Customer Prices
 
+<p>
+    <a href="https://github.com/justbetter/laravel-magento-customer-prices"><img src="https://img.shields.io/github/workflow/status/justbetter/laravel-magento-customer-prices/tests?label=tests&style=flat-square" alt="Tests"></a>
+    <a href="https://github.com/justbetter/laravel-magento-customer-prices"><img src="https://img.shields.io/github/workflow/status/justbetter/laravel-magento-customer-prices/coverage?label=coverage&style=flat-square" alt="Coverage"></a>
+    <a href="https://github.com/justbetter/laravel-magento-customer-prices"><img src="https://img.shields.io/github/workflow/status/justbetter/laravel-magento-customer-prices/analyse?label=analysis&style=flat-square" alt="Analysis"></a>
+    <a href="https://github.com/justbetter/laravel-magento-customer-prices"><img src="https://img.shields.io/packagist/dt/justbetter/laravel-magento-customer-prices?color=blue&style=flat-square" alt="Total downloads"></a>
+</p>
+
 This package provides a way to add customer specific prices to Magento from a Laravel app.
 By default, it uses the [Magaplaza Better Tier Price](https://www.mageplaza.com/magento-2-better-tier-price/) module for customer specific prices.
 You can implement another customer specific price module, see [Replacing Mageplaza](#replacing-mageplaza).

@@ -1,9 +1,9 @@
 # Laravel Magento Customer Prices
 
 <p>
-    <a href="https://github.com/justbetter/laravel-magento-customer-prices"><img src="https://img.shields.io/github/workflow/status/justbetter/laravel-magento-customer-prices/tests?label=tests&style=flat-square" alt="Tests"></a>
-    <a href="https://github.com/justbetter/laravel-magento-customer-prices"><img src="https://img.shields.io/github/workflow/status/justbetter/laravel-magento-customer-prices/coverage?label=coverage&style=flat-square" alt="Coverage"></a>
-    <a href="https://github.com/justbetter/laravel-magento-customer-prices"><img src="https://img.shields.io/github/workflow/status/justbetter/laravel-magento-customer-prices/analyse?label=analysis&style=flat-square" alt="Analysis"></a>
+    <a href="https://github.com/justbetter/laravel-magento-customer-prices"><img src="https://img.shields.io/github/actions/workflow/status/justbetter/laravel-magento-customer-prices/tests.yml?label=tests&style=flat-square" alt="Tests"></a>
+    <a href="https://github.com/justbetter/laravel-magento-customer-prices"><img src="https://img.shields.io/github/actions/workflow/status/justbetter/laravel-magento-customer-prices/coverage.yml?label=coverage&style=flat-square" alt="Coverage"></a>
+    <a href="https://github.com/justbetter/laravel-magento-customer-prices"><img src="https://img.shields.io/github/actions/workflow/status/justbetter/laravel-magento-customer-prices/analyse.yml?label=analysis&style=flat-square" alt="Analysis"></a>
     <a href="https://github.com/justbetter/laravel-magento-customer-prices"><img src="https://img.shields.io/packagist/dt/justbetter/laravel-magento-customer-prices?color=blue&style=flat-square" alt="Total downloads"></a>
 </p>
 

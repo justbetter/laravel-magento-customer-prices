@@ -97,9 +97,8 @@ class CustomerPriceData implements Arrayable
             'customer_id' => (string) $this->customerId,
             'price_qty' => max($this->quantity, 1),
             'value_type' => 'fixed',
-            'price' => $this->getPrice()->getAmount()->toFloat(),
-            'percentage_value' => '',
-            'mp_discount_fixed' => '',
+            'price' => (string) $this->getPrice()->getAmount()->toFloat(),
+            'initialize' => '1',
         ];
     }
 

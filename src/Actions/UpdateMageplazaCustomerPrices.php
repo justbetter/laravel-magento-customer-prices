@@ -23,7 +23,7 @@ class UpdateMageplazaCustomerPrices implements UpdatesMagentoCustomerPrices
             $customer = $this->magento->get('customers/'.$price->getCustomerId())->json();
 
             $data['customer'] = implode(' ', [$customer['firstname'], $customer['lastname']]);
-            $data['record_id'] = $recordId;
+            $data['record_id'] = (string) $recordId;
 
             $recordId++;
 

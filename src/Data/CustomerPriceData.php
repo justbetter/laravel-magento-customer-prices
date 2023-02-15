@@ -93,9 +93,9 @@ class CustomerPriceData implements Arrayable
     public function toMageplazaData(): array
     {
         return [
-            'website_id' => $this->storeId,
+            'website_id' => (string) $this->storeId,
             'customer_id' => (string) $this->customerId,
-            'price_qty' => max($this->quantity, 1),
+            'price_qty' =>(string) max($this->quantity, 1),
             'value_type' => 'fixed',
             'price' => (string) $this->getPrice()->getAmount()->toFloat(),
             'initialize' => '1',

@@ -18,7 +18,7 @@ class DeterminePricesModifiedTest extends TestCase
         $this->assertEquals($modified, $action->check(collect($pricesA), collect($pricesB)));
     }
 
-    public function provider(): array
+    public static function provider(): array
     {
         return [
             'modified_price' => [

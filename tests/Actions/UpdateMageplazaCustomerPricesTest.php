@@ -52,7 +52,7 @@ class UpdateMageplazaCustomerPricesTest extends TestCase
                         'custom_attributes' => [
                             [
                                 'attribute_code' => 'mp_specific_customer',
-                                'value' => '[{"website_id":0,"customer_id":"1","price_qty":1,"value_type":"fixed","price":40.52,"percentage_value":"","mp_discount_fixed":"","customer":"::firstname:: ::lastname::"}]',
+                                'value' => '[{"website_id":"0","customer_id":"1","price_qty":"1","value_type":"fixed","price":"40.52","initialize":"1","customer":"::firstname:: ::lastname::","record_id":"0"}]',
                             ],
                         ],
                     ],

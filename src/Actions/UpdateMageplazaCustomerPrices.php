@@ -16,7 +16,7 @@ class UpdateMageplazaCustomerPrices implements UpdatesMagentoCustomerPrices
     public function update(MagentoCustomerPrice $model): void
     {
         $recordId = 0;
-        $mageplazaData = $model->getDataCollection()->map(function (CustomerPriceData $price) use(&$recordId) {
+        $mageplazaData = $model->getDataCollection()->map(function (CustomerPriceData $price) use (&$recordId) {
             $data = $price->toMageplazaData();
 
             // Retrieve the customer name from Magento

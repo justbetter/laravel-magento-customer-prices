@@ -9,6 +9,3 @@ parameters:
     level: 8
     checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: false
-    ignoreErrors:
-        - '#Unable to resolve the template type TKey in call to function collect#'
-        - '#Unable to resolve the template type TValue in call to function collect#'

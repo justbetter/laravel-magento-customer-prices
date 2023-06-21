@@ -8,8 +8,8 @@
 </p>
 
 This package provides a way to add customer specific prices to Magento from a Laravel app.
-By default, it uses the [Magaplaza Better Tier Price](https://www.mageplaza.com/magento-2-better-tier-price/) module for customer specific prices.
-You can implement another customer specific price module, see [Replacing Mageplaza](#replacing-mageplaza).
+By default, it uses the [JustBetter Magento 2 Customer Pricing](https://github.com/justbetter/magento2-customer-pricing) module for customer specific prices.
+You can implement another customer specific price module, see [Updating Customer Prices](#magento-2-customer-prices).
 
 ## Features
 This package can:
@@ -88,11 +88,12 @@ Must return an enumerable of strings
 #### Example
 See the `\JustBetter\MagentoCustomerPrices\Retriever\DummyCustomerPriceRetriever` class for an example.
 
-## Replacing Mageplaza
+## Magento 2 Customer Prices
 
-By default this package uses the [Magaplaza Better Tier Price](https://www.mageplaza.com/magento-2-better-tier-price/) module for updating prices to Magento.
-You can use another package by creating a class that implements `JustBetter\MagentoCustomerPrices\Contracts\UpdatesMagentoCustomerPrices`.
-See `\JustBetter\MagentoCustomerPrices\Actions\UpdateMageplazaCustomerPrices` for an example.
+By default this package uses the [JustBetter Magento 2 Customer Pricing](https://github.com/justbetter/magento2-customer-pricing) module for updating prices to Magento.
+If you use another Magento 2 module for customer specific pricing you can write your own class that updates prices in Magento.
+You can do this by implementing  `JustBetter\MagentoCustomerPrices\Contracts\UpdatesMagentoCustomerPrices`.
+See `\JustBetter\MagentoCustomerPrices\Actions\UpdateCustomerPrices` for an example.
 
 Don't forget to bind your own class!
 ```

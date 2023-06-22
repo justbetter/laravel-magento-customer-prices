@@ -1,6 +1,18 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/1.1.0...main)
+[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/2.0.0...main)
+## [2.0.0](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/2.0.0) - 2023-06-22
+
+### Upgrading
+
+See https://github.com/justbetter/laravel-magento-customer-prices/blob/main/UPGRADE.md on how to upgrade to 2.x
+
+### What's Changed
+* Support JB customer pricing module, drop support for Mageplaza by @VincentBean in https://github.com/justbetter/laravel-magento-customer-prices/pull/6
+
+
+**Full Changelog**: https://github.com/justbetter/laravel-magento-customer-prices/compare/1.1.0...2.0.0
+
 ## [1.1.0](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/1.1.0) - 2023-03-10
 
 ### What's Changed

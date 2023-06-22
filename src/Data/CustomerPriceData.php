@@ -90,18 +90,6 @@ class CustomerPriceData implements Arrayable
         );
     }
 
-    public function toMageplazaData(): array
-    {
-        return [
-            'website_id' => (string) $this->storeId,
-            'customer_id' => (string) $this->customerId,
-            'price_qty' => (string) max($this->quantity, 1),
-            'value_type' => 'fixed',
-            'price' => (string) $this->getPrice()->getAmount()->toFloat(),
-            'initialize' => '1',
-        ];
-    }
-
     public function equals(self $other): bool
     {
         /** @var string $a */

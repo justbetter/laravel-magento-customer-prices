@@ -9,7 +9,7 @@ use JustBetter\MagentoCustomerPrices\Actions\RetrieveAllCustomerPriceSkus;
 use JustBetter\MagentoCustomerPrices\Actions\RetrieveCustomerPrice;
 use JustBetter\MagentoCustomerPrices\Actions\RetrieveUpdatedPriceSkus;
 use JustBetter\MagentoCustomerPrices\Actions\RunCustomerPriceSync;
-use JustBetter\MagentoCustomerPrices\Actions\UpdateMageplazaCustomerPrices;
+use JustBetter\MagentoCustomerPrices\Actions\UpdateCustomerPrices;
 use JustBetter\MagentoCustomerPrices\Actions\UpdatePrices;
 use JustBetter\MagentoCustomerPrices\Commands\RetrieveAllCustomerPricesCommand;
 use JustBetter\MagentoCustomerPrices\Commands\RetrieveCustomerPriceCommand;
@@ -53,7 +53,7 @@ class ServiceProvider extends BaseServiceProvider
         RunCustomerPriceSync::bind();
 
         UpdatePrices::bind();
-        UpdateMageplazaCustomerPrices::bind();
+        UpdateCustomerPrices::bind();
 
         return $this;
     }

@@ -2,8 +2,6 @@
 
 namespace JustBetter\MagentoCustomerPrices\Tests\Jobs;
 
-use Exception;
-use JustBetter\ErrorLogger\Models\Error;
 use JustBetter\MagentoCustomerPrices\Contracts\UpdatesPrices;
 use JustBetter\MagentoCustomerPrices\Jobs\UpdateCustomerPriceJob;
 use JustBetter\MagentoCustomerPrices\Tests\TestCase;
@@ -28,13 +26,5 @@ class UpdateCustomerPriceJobTest extends TestCase
 
         $this->assertEquals('::sku::', $job->uniqueId());
         $this->assertEquals(['::sku::'], $job->tags());
-    }
-
-    public function test_it_registers_failure(): void
-    {
-        $job = new UpdateCustomerPriceJob('::sku::');
-
-        $job->failed(new Exception('::test::'));
-        $this->assertCount(1, Error::all());
     }
 }

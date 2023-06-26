@@ -2,8 +2,6 @@
 
 namespace JustBetter\MagentoCustomerPrices\Tests\Jobs;
 
-use Exception;
-use JustBetter\ErrorLogger\Models\Error;
 use JustBetter\MagentoCustomerPrices\Contracts\ProcessesRetrievedPrice;
 use JustBetter\MagentoCustomerPrices\Contracts\RetrievesCustomerPrice;
 use JustBetter\MagentoCustomerPrices\Jobs\RetrieveCustomerPriceJob;
@@ -37,13 +35,5 @@ class RetrieveCustomerPriceJobTest extends TestCase
 
         $this->assertEquals('::sku::', $job->uniqueId());
         $this->assertEquals(['::sku::'], $job->tags());
-    }
-
-    public function test_it_registers_failure(): void
-    {
-        $job = new RetrieveCustomerPriceJob('::sku::');
-
-        $job->failed(new Exception('::test::'));
-        $this->assertCount(1, Error::all());
     }
 }

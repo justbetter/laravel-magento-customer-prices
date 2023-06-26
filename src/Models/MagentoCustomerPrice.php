@@ -5,7 +5,6 @@ namespace JustBetter\MagentoCustomerPrices\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
-use JustBetter\ErrorLogger\Traits\HasErrors;
 use JustBetter\MagentoCustomerPrices\Data\CustomerPriceData;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -25,7 +24,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class MagentoCustomerPrice extends Model
 {
-    use HasErrors;
     use LogsActivity;
 
     public const STATE_IDLE = 'idle';

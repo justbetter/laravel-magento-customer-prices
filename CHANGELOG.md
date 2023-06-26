@@ -1,6 +1,14 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/2.0.0...main)
+[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/2.0.1...main)
+## [2.0.1](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/2.0.1) - 2023-06-26
+
+### What's Changed
+* Activity log errors by @VincentBean in https://github.com/justbetter/laravel-magento-customer-prices/pull/7
+
+
+**Full Changelog**: https://github.com/justbetter/laravel-magento-customer-prices/compare/2.0.0...2.0.1
+
 ## [2.0.0](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/2.0.0) - 2023-06-22
 
 ### Upgrading

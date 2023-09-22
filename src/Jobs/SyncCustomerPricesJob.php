@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use JustBetter\MagentoCustomerPrices\Contracts\RunsCustomerPriceSync;
 
-class SyncCustomerPricesJob implements ShouldQueue, ShouldBeUnique
+class SyncCustomerPricesJob implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;

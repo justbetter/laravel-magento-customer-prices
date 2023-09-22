@@ -12,7 +12,7 @@ use JustBetter\MagentoCustomerPrices\Contracts\UpdatesPrices;
 use JustBetter\MagentoCustomerPrices\Models\MagentoCustomerPrice;
 use Throwable;
 
-class UpdateCustomerPriceJob implements ShouldQueue, ShouldBeUnique
+class UpdateCustomerPriceJob implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;

@@ -12,7 +12,7 @@ use JustBetter\ErrorLogger\Models\Error;
 use JustBetter\MagentoCustomerPrices\Contracts\RetrievesAllCustomerPriceSkus;
 use Throwable;
 
-class RetrieveAllCustomerPricesJob implements ShouldQueue, ShouldBeUnique
+class RetrieveAllCustomerPricesJob implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;

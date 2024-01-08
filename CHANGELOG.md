@@ -1,6 +1,16 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/2.0.1...main)
+[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/2.0.2...main)
+## [2.0.2](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/2.0.2) - 2024-01-08
+
+### What's Changed
+* Reset failure data if success by @FinnPaes in https://github.com/justbetter/laravel-magento-customer-prices/pull/8
+
+### New Contributors
+* @FinnPaes made their first contribution in https://github.com/justbetter/laravel-magento-customer-prices/pull/8
+
+**Full Changelog**: https://github.com/justbetter/laravel-magento-customer-prices/compare/2.0.1...2.0.2
+
 ## [2.0.1](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/2.0.1) - 2023-06-26
 
 ### What's Changed

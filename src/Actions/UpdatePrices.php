@@ -37,6 +37,11 @@ class UpdatePrices implements UpdatesPrices
 
         $this->magentoCustomerPrices->update($model);
 
+        $model->update([
+            'fail_count' => 0,
+            'last_failed' => null,
+        ]);
+
         activity()
             ->performedOn($model)
             ->log('Updated price');

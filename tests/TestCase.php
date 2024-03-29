@@ -3,6 +3,7 @@
 namespace JustBetter\MagentoCustomerPrices\Tests;
 
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use JustBetter\MagentoClient\Client\Magento;
 use JustBetter\MagentoCustomerPrices\ServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Spatie\Activitylog\ActivitylogServiceProvider;
@@ -26,6 +27,7 @@ abstract class TestCase extends BaseTestCase
         ]);
 
         activity()->disableLogging();
+        Magento::fake();
     }
 
     protected function getPackageProviders($app): array

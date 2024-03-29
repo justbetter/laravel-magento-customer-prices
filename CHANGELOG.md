@@ -1,6 +1,14 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/2.0.2...main)
+[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/2.1.0...main)
+## [2.1.0](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/2.1.0) - 2024-03-29
+
+### What's Changed
+* Support Laravel 11 by @VincentBean in https://github.com/justbetter/laravel-magento-customer-prices/pull/9
+
+
+**Full Changelog**: https://github.com/justbetter/laravel-magento-customer-prices/compare/2.0.2...2.1.0
+
 ## [2.0.2](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/2.0.2) - 2024-01-08
 
 ### What's Changed

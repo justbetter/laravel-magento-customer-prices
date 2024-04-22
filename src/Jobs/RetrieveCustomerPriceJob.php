@@ -60,11 +60,9 @@ class RetrieveCustomerPriceJob implements ShouldBeUnique, ShouldQueue
 
         activity()
             ->on($model)
+            ->useLog('error')
             ->withProperties([
                 'exception' => $throwable->getMessage(),
-                'metadata' => [
-                    'level' => 'error',
-                ],
             ])
             ->log('Failed to retrieve customer price');
     }

@@ -6,9 +6,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Foundation\Bus\PendingDispatch;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use JustBetter\ErrorLogger\Models\Error;
 use JustBetter\MagentoCustomerPrices\Contracts\RetrievesAllCustomerPriceSkus;
 use Throwable;
 
@@ -21,6 +21,8 @@ class RetrieveAllCustomerPricesJob implements ShouldBeUnique, ShouldQueue
 
     public int $timeout = 1800;
 
+    public int $tries = 1;
+
     public function __construct(protected bool $forceUpdate = false)
     {
         $this->onQueue(config('magento-customer-prices.queue'));
@@ -29,15 +31,17 @@ class RetrieveAllCustomerPricesJob implements ShouldBeUnique, ShouldQueue
     public function handle(RetrievesAllCustomerPriceSkus $retrievesAllCustomerPriceSkus): void
     {
         $retrievesAllCustomerPriceSkus->retrieve()
-            ->each(fn (string $sku) => RetrieveCustomerPriceJob::dispatch($sku, $this->forceUpdate));
+            ->each(fn (string $sku): PendingDispatch => RetrieveCustomerPriceJob::dispatch($sku, $this->forceUpdate));
     }
 
+    /** @codeCoverageIgnore  */
     public function failed(Throwable $throwable): void
     {
-        Error::log()
-            ->withGroup('Customer Prices')
-            ->withMessage('Failed to retrieve all customer prices')
-            ->fromThrowable($throwable)
-            ->save();
+        activity()
+            ->useLog('error')
+            ->withProperties([
+                'exception' => $throwable->getMessage(),
+            ])
+            ->log('Failed to retrieve all customer prices');
     }
 }

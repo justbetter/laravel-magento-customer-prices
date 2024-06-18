@@ -1,6 +1,14 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/2.1.1...main)
+[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/2.1.2...main)
+## [2.1.2](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/2.1.2) - 2024-06-18
+
+### What's Changed
+* Set retrieve all job tries to one, remove error log by @VincentBean in https://github.com/justbetter/laravel-magento-customer-prices/pull/11
+
+
+**Full Changelog**: https://github.com/justbetter/laravel-magento-customer-prices/compare/2.1.1...2.1.2
+
 ## [2.1.1](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/2.1.1) - 2024-04-22
 
 ### What's Changed

@@ -2,9 +2,7 @@
 
 namespace JustBetter\MagentoCustomerPrices\Tests\Jobs;
 
-use Exception;
 use Illuminate\Support\Facades\Bus;
-use JustBetter\ErrorLogger\Models\Error;
 use JustBetter\MagentoCustomerPrices\Contracts\RetrievesAllCustomerPriceSkus;
 use JustBetter\MagentoCustomerPrices\Jobs\RetrieveAllCustomerPricesJob;
 use JustBetter\MagentoCustomerPrices\Jobs\RetrieveCustomerPriceJob;
@@ -24,14 +22,5 @@ class RetrieveAllCustomerPricesJobTest extends TestCase
         RetrieveAllCustomerPricesJob::dispatchSync();
 
         Bus::assertDispatchedTimes(RetrieveCustomerPriceJob::class, 2);
-    }
-
-    public function test_failed_logs_error(): void
-    {
-        $job = new RetrieveAllCustomerPricesJob();
-
-        $job->failed(new Exception('::test::'));
-
-        $this->assertCount(1, Error::all());
     }
 }

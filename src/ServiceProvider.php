@@ -3,19 +3,17 @@
 namespace JustBetter\MagentoCustomerPrices;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use JustBetter\MagentoCustomerPrices\Actions\DeterminePricesModified;
-use JustBetter\MagentoCustomerPrices\Actions\ProcessRetrievedPrice;
-use JustBetter\MagentoCustomerPrices\Actions\RetrieveAllCustomerPriceSkus;
-use JustBetter\MagentoCustomerPrices\Actions\RetrieveCustomerPrice;
-use JustBetter\MagentoCustomerPrices\Actions\RetrieveUpdatedPriceSkus;
-use JustBetter\MagentoCustomerPrices\Actions\RunCustomerPriceSync;
-use JustBetter\MagentoCustomerPrices\Actions\UpdateCustomerPrices;
-use JustBetter\MagentoCustomerPrices\Actions\UpdatePrices;
-use JustBetter\MagentoCustomerPrices\Commands\RetrieveAllCustomerPricesCommand;
-use JustBetter\MagentoCustomerPrices\Commands\RetrieveCustomerPriceCommand;
-use JustBetter\MagentoCustomerPrices\Commands\RetrieveUpdatedCustomerPricesCommand;
-use JustBetter\MagentoCustomerPrices\Commands\SyncCustomerPricesCommand;
-use JustBetter\MagentoCustomerPrices\Commands\UpdateCustomerPriceCommand;
+use JustBetter\MagentoCustomerPrices\Actions\Retrieval\RetrieveAllCustomerPrices;
+use JustBetter\MagentoCustomerPrices\Actions\Retrieval\RetrieveCustomerPrice;
+use JustBetter\MagentoCustomerPrices\Actions\Retrieval\SaveCustomerPrice;
+use JustBetter\MagentoCustomerPrices\Actions\ProcessCustomerPrices;
+use JustBetter\MagentoCustomerPrices\Actions\Update\UpdateCustomerPricesAsync;
+use JustBetter\MagentoCustomerPrices\Actions\Update\UpdateCustomerPriceSync;
+use JustBetter\MagentoCustomerPrices\Commands\ProcessPricesCommand;
+use JustBetter\MagentoCustomerPrices\Commands\Retrieval\RetrieveAllCustomerPricesCommand;
+use JustBetter\MagentoCustomerPrices\Commands\Retrieval\RetrieveCustomerPriceCommand;
+use JustBetter\MagentoCustomerPrices\Commands\Update\UpdateAllCustomerPricesCommand;
+use JustBetter\MagentoCustomerPrices\Commands\Update\UpdateCustomerPriceCommand;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -44,16 +42,14 @@ class ServiceProvider extends BaseServiceProvider
 
     public function registerActions(): static
     {
-        RetrieveAllCustomerPriceSkus::bind();
+        RetrieveAllCustomerPrices::bind();
         RetrieveCustomerPrice::bind();
-        RetrieveUpdatedPriceSkus::bind();
+        SaveCustomerPrice::bind();
 
-        ProcessRetrievedPrice::bind();
-        DeterminePricesModified::bind();
-        RunCustomerPriceSync::bind();
+        UpdateCustomerPricesAsync::bind();
+        UpdateCustomerPriceSync::bind();
 
-        UpdatePrices::bind();
-        UpdateCustomerPrices::bind();
+        ProcessCustomerPrices::bind();
 
         return $this;
     }
@@ -73,9 +69,11 @@ class ServiceProvider extends BaseServiceProvider
             $this->commands([
                 RetrieveAllCustomerPricesCommand::class,
                 RetrieveCustomerPriceCommand::class,
-                RetrieveUpdatedCustomerPricesCommand::class,
-                SyncCustomerPricesCommand::class,
+
+                UpdateAllCustomerPricesCommand::class,
                 UpdateCustomerPriceCommand::class,
+
+                ProcessPricesCommand::class,
             ]);
         }
 

@@ -5,7 +5,7 @@ namespace JustBetter\MagentoCustomerPrices\Tests\Actions;
 use Exception;
 use JustBetter\MagentoCustomerPrices\Actions\UpdatePrices;
 use JustBetter\MagentoCustomerPrices\Contracts\UpdatesMagentoCustomerPrices;
-use JustBetter\MagentoCustomerPrices\Models\MagentoCustomerPrice;
+use JustBetter\MagentoCustomerPrices\Models\CustomerPrice;
 use JustBetter\MagentoCustomerPrices\Tests\TestCase;
 use JustBetter\MagentoProducts\Contracts\ChecksMagentoExistence;
 use Mockery\MockInterface;
@@ -16,7 +16,7 @@ class UpdatePricesTest extends TestCase
     {
         parent::setUp();
 
-        MagentoCustomerPrice::create(['sku' => '::sku::']);
+        CustomerPrice::create(['sku' => '::sku::']);
     }
 
     public function test_it_returns_when_no_price_exists(): void
@@ -69,9 +69,9 @@ class UpdatePricesTest extends TestCase
 
         $action->update('::sku::');
 
-        /** @var MagentoCustomerPrice $model */
-        $model = MagentoCustomerPrice::findBySku('::sku::');
-        $this->assertEquals(MagentoCustomerPrice::STATE_UPDATING, $model->state);
+        /** @var CustomerPrice $model */
+        $model = CustomerPrice::findBySku('::sku::');
+        $this->assertEquals(CustomerPrice::STATE_UPDATING, $model->state);
     }
 
     public function test_it_sets_status_to_idle(): void
@@ -89,9 +89,9 @@ class UpdatePricesTest extends TestCase
 
         $action->update('::sku::');
 
-        /** @var MagentoCustomerPrice $model */
-        $model = MagentoCustomerPrice::findBySku('::sku::');
-        $this->assertEquals(MagentoCustomerPrice::STATE_IDLE, $model->state);
+        /** @var CustomerPrice $model */
+        $model = CustomerPrice::findBySku('::sku::');
+        $this->assertEquals(CustomerPrice::STATE_IDLE, $model->state);
     }
 
     public function test_disable_sync_when_not_exists(): void
@@ -109,8 +109,8 @@ class UpdatePricesTest extends TestCase
 
         $action->update('::sku::');
 
-        /** @var MagentoCustomerPrice $model */
-        $model = MagentoCustomerPrice::findBySku('::sku::');
+        /** @var CustomerPrice $model */
+        $model = CustomerPrice::findBySku('::sku::');
         $this->assertFalse($model->sync);
     }
 }

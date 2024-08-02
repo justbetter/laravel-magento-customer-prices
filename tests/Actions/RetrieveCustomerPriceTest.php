@@ -3,7 +3,7 @@
 namespace JustBetter\MagentoCustomerPrices\Tests\Actions;
 
 use JustBetter\MagentoCustomerPrices\Actions\RetrieveCustomerPrice;
-use JustBetter\MagentoCustomerPrices\Models\MagentoCustomerPrice;
+use JustBetter\MagentoCustomerPrices\Models\CustomerPrice;
 use JustBetter\MagentoCustomerPrices\Retriever\DummyCustomerPriceRetriever;
 use JustBetter\MagentoCustomerPrices\Tests\TestCase;
 use Mockery\MockInterface;
@@ -23,14 +23,14 @@ class RetrieveCustomerPriceTest extends TestCase
 
     public function test_it_sets_status_and_calls_retriever(): void
     {
-        /** @var MagentoCustomerPrice $price */
-        $price = MagentoCustomerPrice::create(['sku' => '::sku::']);
+        /** @var CustomerPrice $price */
+        $price = CustomerPrice::create(['sku' => '::sku::']);
 
         /** @var RetrieveCustomerPrice $action */
         $action = app(RetrieveCustomerPrice::class);
         $result = $action->retrieve('::sku::')->toArray();
 
-        $this->assertEquals(MagentoCustomerPrice::STATE_RETRIEVING, $price->refresh()->state);
+        $this->assertEquals(CustomerPrice::STATE_RETRIEVING, $price->refresh()->state);
         $this->assertEquals(['result'], $result);
     }
 }

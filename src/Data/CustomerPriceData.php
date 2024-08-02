@@ -2,102 +2,23 @@
 
 namespace JustBetter\MagentoCustomerPrices\Data;
 
-use Brick\Money\Money;
-use Illuminate\Contracts\Support\Arrayable;
-use JustBetter\MagentoCustomerPrices\Helpers\MoneyHelper;
+use JustBetter\MagentoPrices\Data\Data;
 
-/** @phpstan-consistent-constructor */
-class CustomerPriceData implements Arrayable
+class CustomerPriceData extends Data
 {
-    public function __construct(
-        public string $sku,
-        public Money $price,
-        public int $customerId,
-        public int $quantity = 0,
-        public int $storeId = 0
-    ) {
-    }
+    public array $rules = [
+        'prices' => ['array'],
+        'prices.*.price' => ['required', 'numeric'],
+        'prices.*.customer_id' => ['required', 'integer'],
+        'prices.*.quantity' => ['required', 'numeric'],
+    ];
 
-    public function getSku(): string
+    public function checksum(): string
     {
-        return $this->sku;
-    }
+        $json = json_encode($this->validated());
 
-    public function setSku(string $sku): void
-    {
-        $this->sku = $sku;
-    }
+        throw_if($json === false, 'Failed to generate checksum');
 
-    public function getPrice(): Money
-    {
-        return $this->price;
-    }
-
-    public function setPrice(Money $price): void
-    {
-        $this->price = $price;
-    }
-
-    public function getCustomerId(): int
-    {
-        return $this->customerId;
-    }
-
-    public function setCustomerId(int $customerId): void
-    {
-        $this->customerId = $customerId;
-    }
-
-    public function getQuantity(): int
-    {
-        return $this->quantity;
-    }
-
-    public function setQuantity(int $quantity): void
-    {
-        $this->quantity = $quantity;
-    }
-
-    public function getStoreId(): int
-    {
-        return $this->storeId;
-    }
-
-    public function setStoreId(int $storeId): void
-    {
-        $this->storeId = $storeId;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'sku' => $this->getSku(),
-            'price' => (string) $this->getPrice()->getAmount(),
-            'customerId' => $this->getCustomerId(),
-            'quantity' => $this->getQuantity(),
-            'storeId' => $this->getStoreId(),
-        ];
-    }
-
-    public static function fromArray(array $data): static
-    {
-        return new static(
-            $data['sku'],
-            app(MoneyHelper::class)->getMoney($data['price']),
-            $data['customerId'],
-            $data['quantity'] ?? 0,
-            $data['storeId'] ?? 0
-        );
-    }
-
-    public function equals(self $other): bool
-    {
-        /** @var string $a */
-        $a = json_encode($this->toArray());
-
-        /** @var string $b */
-        $b = json_encode($other->toArray());
-
-        return md5($a) == md5($b);
+        return md5($json);
     }
 }

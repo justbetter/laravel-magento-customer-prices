@@ -6,21 +6,21 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use JustBetter\MagentoCustomerPrices\Actions\UpdateCustomerPrices;
-use JustBetter\MagentoCustomerPrices\Models\MagentoCustomerPrice;
+use JustBetter\MagentoCustomerPrices\Models\CustomerPrice;
 use JustBetter\MagentoCustomerPrices\Tests\TestCase;
 
 class UpdateCustomerPricesTest extends TestCase
 {
     public UpdateCustomerPrices $action;
 
-    public MagentoCustomerPrice $model;
+    public CustomerPrice $model;
 
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->action = app(UpdateCustomerPrices::class);
-        $this->model = MagentoCustomerPrice::create([
+        $this->model = CustomerPrice::create([
             'sku' => '::sku::',
             'prices' => [
                 [

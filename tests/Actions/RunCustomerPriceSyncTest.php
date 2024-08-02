@@ -3,30 +3,30 @@
 namespace JustBetter\MagentoCustomerPrices\Tests\Actions;
 
 use Illuminate\Support\Facades\Bus;
-use JustBetter\MagentoCustomerPrices\Actions\RunCustomerPriceSync;
+use JustBetter\MagentoCustomerPrices\Actions\ProcessCustomerPrices;
 use JustBetter\MagentoCustomerPrices\Jobs\RetrieveCustomerPriceJob;
 use JustBetter\MagentoCustomerPrices\Jobs\UpdateCustomerPriceJob;
-use JustBetter\MagentoCustomerPrices\Models\MagentoCustomerPrice;
+use JustBetter\MagentoCustomerPrices\Models\CustomerPrice;
 use JustBetter\MagentoCustomerPrices\Tests\TestCase;
 
 class RunCustomerPriceSyncTest extends TestCase
 {
-    protected RunCustomerPriceSync $action;
+    protected ProcessCustomerPrices $action;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->action = app(RunCustomerPriceSync::class);
+        $this->action = app(ProcessCustomerPrices::class);
     }
 
     public function test_it_dispatches_retrieve_jobs(): void
     {
         Bus::fake();
 
-        MagentoCustomerPrice::create(['sku' => '::sku_1::', 'state' => MagentoCustomerPrice::STATE_RETRIEVE]);
-        MagentoCustomerPrice::create(['sku' => '::sku_2::', 'state' => MagentoCustomerPrice::STATE_RETRIEVE]);
-        MagentoCustomerPrice::create(['sku' => '::sku_3::', 'state' => MagentoCustomerPrice::STATE_IDLE]);
+        CustomerPrice::create(['sku' => '::sku_1::', 'state' => CustomerPrice::STATE_RETRIEVE]);
+        CustomerPrice::create(['sku' => '::sku_2::', 'state' => CustomerPrice::STATE_RETRIEVE]);
+        CustomerPrice::create(['sku' => '::sku_3::', 'state' => CustomerPrice::STATE_IDLE]);
 
         $this->action->sync();
 
@@ -40,10 +40,10 @@ class RunCustomerPriceSyncTest extends TestCase
     {
         Bus::fake();
 
-        MagentoCustomerPrice::create(['sku' => '::sku_1::', 'state' => MagentoCustomerPrice::STATE_UPDATE]);
-        MagentoCustomerPrice::create(['sku' => '::sku_2::', 'state' => MagentoCustomerPrice::STATE_RETRIEVE]);
-        MagentoCustomerPrice::create(['sku' => '::sku_3::', 'state' => MagentoCustomerPrice::STATE_UPDATE]);
-        MagentoCustomerPrice::create(['sku' => '::sku_4::', 'state' => MagentoCustomerPrice::STATE_FAILED]);
+        CustomerPrice::create(['sku' => '::sku_1::', 'state' => CustomerPrice::STATE_UPDATE]);
+        CustomerPrice::create(['sku' => '::sku_2::', 'state' => CustomerPrice::STATE_RETRIEVE]);
+        CustomerPrice::create(['sku' => '::sku_3::', 'state' => CustomerPrice::STATE_UPDATE]);
+        CustomerPrice::create(['sku' => '::sku_4::', 'state' => CustomerPrice::STATE_FAILED]);
 
         $this->action->sync();
 

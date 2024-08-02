@@ -5,7 +5,7 @@ namespace JustBetter\MagentoCustomerPrices\Commands;
 use Illuminate\Console\Command;
 use JustBetter\MagentoCustomerPrices\Jobs\ProcessCustomerPricesJob;
 
-class ProcessPricesCommand extends Command
+class ProcessCustomerPricesCommand extends Command
 {
     protected $signature = 'magento-customer-prices:process';
 

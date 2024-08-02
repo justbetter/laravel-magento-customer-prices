@@ -3,7 +3,10 @@
 namespace JustBetter\MagentoCustomerPrices\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
+use JustBetter\MagentoCustomerPrices\Repository\BaseRepository;
+use JustBetter\MagentoProducts\Models\MagentoProduct;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -21,10 +24,13 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property ?string $checksum
  * @property ?Carbon $created_at
  * @property ?Carbon $updated_at
+ * @property ?MagentoProduct $product
  */
 class CustomerPrice extends Model
 {
     use LogsActivity;
+
+    protected $table = 'magento_customer_prices';
 
     public $guarded = [];
 
@@ -38,16 +44,33 @@ class CustomerPrice extends Model
         'last_failed' => 'datetime',
     ];
 
-    public function registerFailure(string $previousState): void
+    public static function booted(): void
     {
-        $this->last_failed = now();
-        $this->fail_count++;
+        static::updating(function (self $model) {
+            if ($model->update && $model->retrieve) {
+                if (! $model->isDirty(['retrieve'])) {
+                    $model->retrieve = false;
+                } else {
+                    $model->update = false;
+                }
+            }
+        });
+    }
 
-        if ($this->fail_count > config('magento-customer-prices.fail_count', 5)) {
+    public function product(): HasOne
+    {
+        return $this->hasOne(MagentoProduct::class, 'sku', 'sku');
+    }
+
+    public function registerFailure(): void
+    {
+        $this->fail_count++;
+        $this->last_failed = now();
+
+        if ($this->fail_count > BaseRepository::resolve()->failLimit()) {
             $this->update = false;
-            $this->sync = false;
-        } else {
-            $this->setState($previousState);
+            $this->retrieve = false;
+            $this->fail_count = 0;
         }
 
         $this->save();

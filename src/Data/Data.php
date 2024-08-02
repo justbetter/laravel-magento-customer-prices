@@ -1,10 +1,10 @@
 <?php
 
-namespace JustBetter\MagentoPrices\Data;
+namespace JustBetter\MagentoCustomerPrices\Data;
 
 use ArrayAccess;
 use Illuminate\Contracts\Support\Arrayable;
-use JustBetter\MagentoPrices\Concerns\ValidatesData;
+use JustBetter\MagentoCustomerPrices\Concerns\ValidatesData;
 
 abstract class Data implements Arrayable, ArrayAccess
 {

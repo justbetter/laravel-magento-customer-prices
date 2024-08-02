@@ -8,8 +8,8 @@ use JustBetter\MagentoCustomerPrices\Actions\Retrieval\RetrieveCustomerPrice;
 use JustBetter\MagentoCustomerPrices\Actions\Retrieval\SaveCustomerPrice;
 use JustBetter\MagentoCustomerPrices\Actions\ProcessCustomerPrices;
 use JustBetter\MagentoCustomerPrices\Actions\Update\UpdateCustomerPricesAsync;
-use JustBetter\MagentoCustomerPrices\Actions\Update\UpdateCustomerPriceSync;
-use JustBetter\MagentoCustomerPrices\Commands\ProcessPricesCommand;
+use JustBetter\MagentoCustomerPrices\Actions\Update\UpdateCustomerPrice;
+use JustBetter\MagentoCustomerPrices\Commands\ProcessCustomerPricesCommand;
 use JustBetter\MagentoCustomerPrices\Commands\Retrieval\RetrieveAllCustomerPricesCommand;
 use JustBetter\MagentoCustomerPrices\Commands\Retrieval\RetrieveCustomerPriceCommand;
 use JustBetter\MagentoCustomerPrices\Commands\Update\UpdateAllCustomerPricesCommand;
@@ -47,7 +47,7 @@ class ServiceProvider extends BaseServiceProvider
         SaveCustomerPrice::bind();
 
         UpdateCustomerPricesAsync::bind();
-        UpdateCustomerPriceSync::bind();
+        UpdateCustomerPrice::bind();
 
         ProcessCustomerPrices::bind();
 
@@ -73,7 +73,7 @@ class ServiceProvider extends BaseServiceProvider
                 UpdateAllCustomerPricesCommand::class,
                 UpdateCustomerPriceCommand::class,
 
-                ProcessPricesCommand::class,
+                ProcessCustomerPricesCommand::class,
             ]);
         }
 

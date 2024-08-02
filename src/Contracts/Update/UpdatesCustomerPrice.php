@@ -4,7 +4,7 @@ namespace JustBetter\MagentoCustomerPrices\Contracts\Update;
 
 use JustBetter\MagentoCustomerPrices\Models\CustomerPrice;
 
-interface UpdatesCustomerPriceSync
+interface UpdatesCustomerPrice
 {
     public function update(CustomerPrice $price): void;
 }

@@ -4,11 +4,11 @@ namespace JustBetter\MagentoCustomerPrices\Actions\Update;
 
 use Illuminate\Http\Client\Response;
 use JustBetter\MagentoClient\Client\Magento;
-use JustBetter\MagentoCustomerPrices\Contracts\Update\UpdatesCustomerPriceSync;
+use JustBetter\MagentoCustomerPrices\Contracts\Update\UpdatesCustomerPrice;
 use JustBetter\MagentoCustomerPrices\Models\CustomerPrice;
 use JustBetter\MagentoProducts\Contracts\ChecksMagentoExistence;
 
-class UpdateCustomerPriceSync implements UpdatesCustomerPriceSync
+class UpdateCustomerPrice implements UpdatesCustomerPrice
 {
     public function __construct(
         protected Magento $magento,
@@ -45,6 +45,6 @@ class UpdateCustomerPriceSync implements UpdatesCustomerPriceSync
 
     public static function bind(): void
     {
-        app()->singleton(UpdatesCustomerPriceSync::class, static::class);
+        app()->singleton(UpdatesCustomerPrice::class, static::class);
     }
 }

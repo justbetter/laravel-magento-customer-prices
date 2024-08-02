@@ -9,7 +9,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use JustBetter\MagentoCustomerPrices\Contracts\Retrieval\RetrievesCustomerPrice;
 use JustBetter\MagentoCustomerPrices\Models\CustomerPrice;
-use JustBetter\MagentoPrices\Models\Price;
 use Spatie\Activitylog\ActivityLogger;
 use Throwable;
 

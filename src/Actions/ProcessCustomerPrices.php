@@ -10,7 +10,6 @@ use JustBetter\MagentoCustomerPrices\Jobs\Update\UpdateCustomerPricesAsyncJob;
 use JustBetter\MagentoCustomerPrices\Jobs\Update\UpdateCustomerPriceJob;
 use JustBetter\MagentoCustomerPrices\Models\CustomerPrice;
 use JustBetter\MagentoCustomerPrices\Repository\BaseRepository;
-use JustBetter\MagentoPrices\Models\Price;
 
 class ProcessCustomerPrices implements ProcessesCustomerPrices
 {
@@ -25,7 +24,7 @@ class ProcessCustomerPrices implements ProcessesCustomerPrices
             ->take($repository->retrieveLimit())
             ->each(fn (CustomerPrice $price): PendingDispatch => RetrieveCustomerPriceJob::dispatch($price->sku));
 
-        if (config('magento-prices.async')) {
+        if (config('magento-customer-prices.async')) {
             $prices = CustomerPrice::query()
                 ->where('sync', '=', true)
                 ->where('update', '=', true)
@@ -44,7 +43,7 @@ class ProcessCustomerPrices implements ProcessesCustomerPrices
                 ->select(['id', 'sku'])
                 ->take($repository->updateLimit())
                 ->get()
-                ->each(fn (Price $price): PendingDispatch => UpdateCustomerPriceJob::dispatch($price));
+                ->each(fn (CustomerPrice $price): PendingDispatch => UpdateCustomerPriceJob::dispatch($price));
         }
     }
 

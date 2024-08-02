@@ -2,31 +2,54 @@
 
 namespace JustBetter\MagentoCustomerPrices\Tests\Data;
 
+use Illuminate\Validation\ValidationException;
 use JustBetter\MagentoCustomerPrices\Data\CustomerPriceData;
-use JustBetter\MagentoCustomerPrices\Helpers\MoneyHelper;
 use JustBetter\MagentoCustomerPrices\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class CustomerPriceDataTest extends TestCase
 {
-    public function test_setters(): void
+    #[Test]
+    public function it_passes_simple_rules(): void
     {
-        /** @var MoneyHelper $moneyHelper */
-        $moneyHelper = app(MoneyHelper::class);
+        CustomerPriceData::of([
+            'sku' => '::sku::',
+        ]);
 
-        $data = new CustomerPriceData('::sku:::', $moneyHelper->getMoney(10), 1);
+        $this->assertTrue(true, 'No exception thrown');
+    }
 
-        $data->setSku('::sku_2::');
-        $data->setPrice($moneyHelper->getMoney(100));
-        $data->setCustomerId(2);
-        $data->setQuantity(10);
-        $data->setStoreId(1);
+    #[Test]
+    public function it_fails_rules(): void
+    {
+        $this->expectException(ValidationException::class);
 
-        $this->assertEquals([
-            'sku' => '::sku_2::',
-            'price' => '100.0000',
-            'customerId' => 2,
-            'quantity' => 10,
-            'storeId' => 1,
-        ], $data->toArray());
+        CustomerPriceData::of([]);
+    }
+
+    #[Test]
+    public function it_calculates_checksum(): void
+    {
+        $data = CustomerPriceData::of([
+            'sku' => '::sku::',
+        ]);
+
+        $this->assertEquals('b5a9aed3556af7b01952f7fdcd28fdd8', $data->checksum());
+    }
+
+    #[Test]
+    public function it_handles_array_operations(): void
+    {
+        $data = CustomerPriceData::of([
+            'sku' => '::sku::',
+        ]);
+
+        $data['prices'] = [];
+
+        $this->assertEquals([], $data['prices']);
+        $this->assertTrue(isset($data['prices']));
+        unset($data['prices']);
+
+        $this->assertNull($data['prices']);
     }
 }

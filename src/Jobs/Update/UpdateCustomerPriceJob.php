@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use JustBetter\MagentoCustomerPrices\Contracts\Update\UpdatesCustomerPriceSync;
+use JustBetter\MagentoCustomerPrices\Contracts\Update\UpdatesCustomerPrice;
 use JustBetter\MagentoCustomerPrices\Models\CustomerPrice;
 
 class UpdateCustomerPriceJob implements ShouldBeUnique, ShouldQueue
@@ -24,7 +24,7 @@ class UpdateCustomerPriceJob implements ShouldBeUnique, ShouldQueue
         $this->onQueue(config('magento-customer-prices.queue'));
     }
 
-    public function handle(UpdatesCustomerPriceSync $contract): void
+    public function handle(UpdatesCustomerPrice $contract): void
     {
         $contract->update($this->customerPrice);
     }

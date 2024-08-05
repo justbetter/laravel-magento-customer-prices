@@ -100,18 +100,20 @@ use JustBetter\MagentoCustomerPrices\Repository\Repository;
 
 class MyCustomerPriceRepository extends Repository
 {
-  public function retrieve(string $sku): ?PriceData
+  public function retrieve(string $sku): ?CustomerPriceData
     {
-        return PriceData::of([
+        return CustomerPriceData::of([
             'sku' => $sku,
             'prices' => [
                 [
-                    'store_id' => 0,
+                    'customer_id' => 1,
                     'price' => 10,
+                    'quantity' => 1,
                 ],
                 [
-                    'store_id' => 2,
-                    'price' => 19,
+                    'customer_id' => 1,
+                    'price' => 8,
+                    'quantity' => 10,
                 ],
             ],
         ]);

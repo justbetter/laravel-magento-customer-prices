@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use JustBetter\MagentoCustomerPrices\Models\MagentoCustomerPrice;
 
 return new class extends Migration
 {
@@ -17,7 +16,7 @@ return new class extends Migration
 
             $table->json('prices')->nullable();
 
-            $table->string('state')->default(MagentoCustomerPrice::STATE_IDLE);
+            $table->string('state')->default('idle');
 
             $table->dateTime('last_retrieved')->nullable();
             $table->dateTime('last_updated')->nullable();

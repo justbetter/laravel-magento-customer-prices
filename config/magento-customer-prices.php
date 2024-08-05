@@ -1,16 +1,11 @@
 <?php
 
-use Brick\Math\RoundingMode;
-use JustBetter\MagentoCustomerPrices\Retriever\DummyCustomerPriceRetriever;
-
 return [
-    'retriever' => DummyCustomerPriceRetriever::class,
+    'repository' => \JustBetter\MagentoCustomerPrices\Repository\Repository::class,
 
+    /* Queue for the jobs to run on */
     'queue' => 'default',
 
-    'fail_count' => 5,
-
-    'currency' => 'EUR',
-    'precision' => 4,
-    'rounding_mode' => RoundingMode::HALF_UP,
+    /* Send updates using Magento 2's async bulk endpoints, a configured message queue in Magento is required for this */
+    'async' => false,
 ];

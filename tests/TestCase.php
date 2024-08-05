@@ -14,11 +14,6 @@ abstract class TestCase extends BaseTestCase
 
     protected function defineEnvironment($app): void
     {
-        config()->set('magento.base_url', '');
-        config()->set('magento.access_token', '::token::');
-        config()->set('magento.timeout', 30);
-        config()->set('magento.connect_timeout', 30);
-
         config()->set('database.default', 'testbench');
         config()->set('database.connections.testbench', [
             'driver' => 'sqlite',
@@ -35,6 +30,7 @@ abstract class TestCase extends BaseTestCase
         return [
             ServiceProvider::class,
             \JustBetter\MagentoClient\ServiceProvider::class,
+            \JustBetter\MagentoProducts\ServiceProvider::class,
             ActivitylogServiceProvider::class,
         ];
     }

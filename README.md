@@ -140,7 +140,7 @@ use Illuminate\Support\Collection;
 
 class MyCustomerPriceRepository implements Repository
 {
-    public function skus(?Carbon $from = null): ?Collection
+    public function skus(?Carbon $from = null): Collection
     {
         return collect(['sku_1', 'sku_2']);
     }

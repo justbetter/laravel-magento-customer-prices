@@ -32,9 +32,9 @@ class CustomerPrice extends Model
 
     protected $table = 'magento_customer_prices';
 
-    public $guarded = [];
+    protected $guarded = [];
 
-    public $casts = [
+    protected $casts = [
         'sync' => 'boolean',
         'retrieve' => 'boolean',
         'update' => 'boolean',

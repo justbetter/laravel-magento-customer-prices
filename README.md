@@ -23,7 +23,6 @@ This package can:
 - Only update prices in Magento when are modified. i.e. when you retrieve the same price ten times it only updates once to Magento
 - Automatically stop syncing when updating fails
 - Logs activities using [Spatie activitylog](https://github.com/spatie/laravel-activitylog)
-- Logs errors using [JustBetter Error Logger](https://github.com/justbetter/laravel-error-logger)
 - Checks if Magento products exist using [JustBetter Magento Products](https://github.com/justbetter/laravel-magento-products)
 
 > Check out [Laravel Magento Prices](https://github.com/justbetter/laravel-magento-prices) for connecting regular prices to Magneto
@@ -61,49 +60,131 @@ Add the following commands to your scheduler:
 
 protected function schedule(Schedule $schedule): void
 {
-    $schedule->command(\JustBetter\MagentoCustomerPrices\Commands\SyncCustomerPricesCommand::class)->everyMinute();
+    $schedule->command(\JustBetter\MagentoCustomerPrices\Commands\ProcessCustomerPricesCommand::class)->everyMinute();
 
-    // Retrieve all customer prices weekly
-    $schedule->command(\JustBetter\MagentoCustomerPrices\Commands\RetrieveAllCustomerPricesCommand::class)->weekly();
+    // Retrieve all customer prices daily
+    $schedule->command(\JustBetter\MagentoCustomerPrices\Commands\Retrieval\RetrieveAllCustomerPricesCommand::class)->daily();
 
-    // Retrieve updated customer prices daily
-    $schedule->command(\JustBetter\MagentoCustomerPrices\Commands\RetrieveUpdatedCustomerPricesCommand::class)->daily();
+    // Retrieve updated customer prices hourly
+    $schedule->command(\JustBetter\MagentoCustomerPrices\Commands\Retriavel\RetrieveAllCustomerPricesCommand::class, ['from' => 'now - 1 hour'])->hourly();
 }
 ```
 
 ### Retrieving Customer Prices
 
-To retrieve prices you have to write a retriever.
-A retriever is a class that extends the `\JustBetter\MagentoCustomerPrices\Retriever\CustomerPriceRetriever` class.
+This package works with a repository that retrieves prices per SKU which you have to implement.
 
-You'll be required to write three methods:
-#### retrieve(string $sku)
+#### Repository
 
-Must return an enumerable of `\JustBetter\MagentoCustomerPrices\Data\CustomerPriceData` objects
+This class is responsible for retrieving prices for products, retrieving sku's and settings.
+Your class must extend `\JustBetter\MagentoCustomerPrices\Repository\Repository` and implement the `retrieve` method.
+If there is no price for the SKU you may return `null`. In all other cases you need to return a `CustomerPriceData` object which contains two elements:
+- `sku` Required
+- `prices` Optional, array of customer prices
+  - `price` float of the price
+  - `customer_id` Magento 2 customer id
+  - `quantity` Minimum quantity
 
-#### retrieveAllSkus()
+You can view the rules in the `CustomerPriceData` class to get an idea of what you need to provide.
 
-Must return an enumerable of strings
+##### Example
 
-#### retrieveUpdatedSkus()
+```php
 
-Must return an enumerable of strings
+<?php
 
-#### Example
-See the `\JustBetter\MagentoCustomerPrices\Retriever\DummyCustomerPriceRetriever` class for an example.
+namespace App\Integrations\MagentoCustomerPrices;
+
+use JustBetter\MagentoCustomerPrices\Data\CustomerPriceData;
+use JustBetter\MagentoCustomerPrices\Repository\Repository;
+
+class MyCustomerPriceRepository extends Repository
+{
+  public function retrieve(string $sku): ?PriceData
+    {
+        return PriceData::of([
+            'sku' => $sku,
+            'prices' => [
+                [
+                    'store_id' => 0,
+                    'price' => 10,
+                ],
+                [
+                    'store_id' => 2,
+                    'price' => 19,
+                ],
+            ],
+        ]);
+    }
+}
+```
+
+### Retrieving SKU's
+
+By default, the `Repository` that you are extending will retrieve the SKU's from [justbetter/laravel-magento-products](https://github.com/justbetter/laravel-magento-products).
+If you wish to use this you have to add the commands to your scheduler to automatically import products.
+
+If you have another source for your SKU's you may implement the `skus` method yourself.
+It accepts an optional carbon instance to only retrieve modified stock.
+
+```php
+<?php
+
+namespace App\Integrations\MagentoCustomerPrices;
+
+use JustBetter\MagentoCustomerPrices\Repositories\Repository;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
+
+class MyCustomerPriceRepository implements Repository
+{
+    public function skus(?Carbon $from = null): ?Collection
+    {
+        return collect(['sku_1', 'sku_2']);
+    }
+}
+```
+
+### Configuring the repository
+
+The repository class has a couple of settings that you can adjust:
+
+```php
+class BaseRepository
+{
+    // How many prices may be retrieved at once when the process job runs
+    protected int $retrieveLimit = 250;
+
+    // How many prices may be updated at once when the process job runs
+    protected int $updateLimit = 250;
+
+    // How many times an update to Magento may fail before it stops trying
+    protected int $failLimit = 3;
+}
+```
+
+After you've created and configured the repository you have to set it in your configuration file:
+
+```php
+<?php
+
+return [
+    'repository' => \App\Integrations\MagentoCustomerPrices\MyPriceRepository::class,
+];
+```
 
 ## Magento 2 Customer Prices
 
-By default this package uses the [JustBetter Magento 2 Customer Pricing](https://github.com/justbetter/magento2-customer-pricing) module for updating prices to Magento.
+By default, this package uses the [JustBetter Magento 2 Customer Pricing](https://github.com/justbetter/magento2-customer-pricing) module for updating prices to Magento.
 If you use another Magento 2 module for customer specific pricing you can write your own class that updates prices in Magento.
-You can do this by implementing  `JustBetter\MagentoCustomerPrices\Contracts\UpdatesMagentoCustomerPrices`.
-See `\JustBetter\MagentoCustomerPrices\Actions\UpdateCustomerPrices` for an example.
+You can do this by implementing  `JustBetter\MagentoCustomerPrices\Contracts\Update\UpdatesCustomerPrice`.
+See `\JustBetter\MagentoCustomerPrices\Actions\Update\UpdateCustomerPrice` for an example.
 
 Don't forget to bind your own class!
 ```
 <?php
 
-app()->singleton(UpdatesMagentoCustomerPrices::class, YourCustomUpdater::class);
+app()->singleton(\JustBetter\MagentoCustomerPrices\Contracts\Update\UpdatesCustomerPrice::class, YourCustomUpdater::class);
 ```
 
 ## Quality

@@ -50,23 +50,4 @@ class ProcessCustomerPricesTest extends TestCase
         Bus::assertNotDispatched(RetrieveCustomerPriceJob::class);
         Bus::assertDispatched(UpdateCustomerPriceJob::class);
     }
-
-    #[Test]
-    public function it_dispatches_async_update_job(): void
-    {
-        Bus::fake();
-        config()->set('magento-customer-prices.async', true);
-
-        CustomerPrice::query()->create([
-            'sku' => '::sku::',
-            'update' => true,
-            'prices' => [],
-        ]);
-
-        /** @var ProcessCustomerPrices $action */
-        $action = app(ProcessCustomerPrices::class);
-        $action->process();
-
-        Bus::assertDispatched(UpdateCustomerPricesAsyncJob::class);
-    }
 }

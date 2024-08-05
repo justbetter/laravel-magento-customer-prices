@@ -1,6 +1,14 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/2.1.2...main)
+[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/3.0.0...main)
+## [3.0.0](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/3.0.0) - 2024-08-05
+
+### What's Changed
+* Refactor by @VincentBean in https://github.com/justbetter/laravel-magento-customer-prices/pull/12
+
+
+**Full Changelog**: https://github.com/justbetter/laravel-magento-customer-prices/compare/2.1.2...3.0.0
+
 ## [2.1.2](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/2.1.2) - 2024-06-18
 
 ### What's Changed

@@ -21,7 +21,7 @@ class RetrieveAllCustomerPricesTest extends TestCase
         MagentoProduct::query()->create(['sku' => '::sku::', 'exists_in_magento' => true]);
 
         /** @var RetrieveAllCustomerPrices $action */
-        $action = app(RetrieveAllCustomerPrices ::class);
+        $action = app(RetrieveAllCustomerPrices::class);
         $action->retrieve(null);
 
         Bus::assertDispatched(RetrieveCustomerPriceJob::class);

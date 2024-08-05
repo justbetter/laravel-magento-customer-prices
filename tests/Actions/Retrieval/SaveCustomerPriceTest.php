@@ -25,7 +25,7 @@ class SaveCustomerPriceTest extends TestCase
         ]);
 
         /** @var SaveCustomerPrice $action */
-        $action = app(SaveCustomerPrice ::class);
+        $action = app(SaveCustomerPrice::class);
         $action->save($priceData, false);
 
         /** @var CustomerPrice $model */

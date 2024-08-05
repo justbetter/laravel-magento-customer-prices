@@ -53,14 +53,14 @@ class UpdateCustomerPriceTest extends TestCase
 
         Http::assertSent(function (Request $request): bool {
             return $request->data() === [
-                    'customerPrices' => [
-                        [
-                            'customer_id' => 1,
-                            'price' => 10,
-                            'quantity' => 1,
-                        ],
-                    ]
-                ];
+                'customerPrices' => [
+                    [
+                        'customer_id' => 1,
+                        'price' => 10,
+                        'quantity' => 1,
+                    ],
+                ],
+            ];
         });
     }
 

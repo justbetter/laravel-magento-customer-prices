@@ -3,10 +3,10 @@
 namespace JustBetter\MagentoCustomerPrices;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use JustBetter\MagentoCustomerPrices\Actions\ProcessCustomerPrices;
 use JustBetter\MagentoCustomerPrices\Actions\Retrieval\RetrieveAllCustomerPrices;
 use JustBetter\MagentoCustomerPrices\Actions\Retrieval\RetrieveCustomerPrice;
 use JustBetter\MagentoCustomerPrices\Actions\Retrieval\SaveCustomerPrice;
-use JustBetter\MagentoCustomerPrices\Actions\ProcessCustomerPrices;
 use JustBetter\MagentoCustomerPrices\Actions\Update\UpdateCustomerPrice;
 use JustBetter\MagentoCustomerPrices\Commands\ProcessCustomerPricesCommand;
 use JustBetter\MagentoCustomerPrices\Commands\Retrieval\RetrieveAllCustomerPricesCommand;

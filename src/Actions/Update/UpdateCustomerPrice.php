@@ -13,12 +13,11 @@ class UpdateCustomerPrice implements UpdatesCustomerPrice
     public function __construct(
         protected Magento $magento,
         protected ChecksMagentoExistence $magentoExistence
-    ) {
-    }
+    ) {}
 
     public function update(CustomerPrice $price): void
     {
-        if (!$this->magentoExistence->exists($price->sku)) {
+        if (! $this->magentoExistence->exists($price->sku)) {
             $price->update([
                 'update' => false,
             ]);

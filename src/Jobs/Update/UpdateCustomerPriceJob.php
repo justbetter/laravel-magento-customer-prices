@@ -19,7 +19,7 @@ class UpdateCustomerPriceJob implements ShouldBeUnique, ShouldQueue
     use SerializesModels;
 
     public function __construct(
-       public CustomerPrice $customerPrice
+        public CustomerPrice $customerPrice
     ) {
         $this->onQueue(config('magento-customer-prices.queue'));
     }

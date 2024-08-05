@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Bus;
 use JustBetter\MagentoCustomerPrices\Actions\ProcessCustomerPrices;
 use JustBetter\MagentoCustomerPrices\Jobs\Retrieval\RetrieveCustomerPriceJob;
 use JustBetter\MagentoCustomerPrices\Jobs\Update\UpdateCustomerPriceJob;
-use JustBetter\MagentoCustomerPrices\Jobs\Update\UpdateCustomerPricesAsyncJob;
 use JustBetter\MagentoCustomerPrices\Models\CustomerPrice;
 use JustBetter\MagentoCustomerPrices\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -25,7 +24,7 @@ class ProcessCustomerPricesTest extends TestCase
         ]);
 
         /** @var ProcessCustomerPrices $action */
-        $action = app(ProcessCustomerPrices ::class);
+        $action = app(ProcessCustomerPrices::class);
         $action->process();
 
         Bus::assertDispatched(RetrieveCustomerPriceJob::class);

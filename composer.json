@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "justbetter/laravel-magento-client": "^2.4",
+        "justbetter/laravel-magento-client": "^2.6.1",
         "justbetter/laravel-magento-async": "^1.0",
         "justbetter/laravel-magento-products": "^1.4",
         "laravel/framework": "^11.0",
@@ -16,7 +16,8 @@
         "laravel/pint": "^1.15",
         "orchestra/testbench": "^9.0",
         "phpstan/phpstan-mockery": "^1.1",
-        "phpunit/phpunit": "^10.0"
+        "phpunit/phpunit": "^10.0",
+        "pestphp/pest": "^2.0"
     },
     "authors": [
         {
@@ -47,7 +48,10 @@
         "fix-style": "pint"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "extra": {
         "laravel": {

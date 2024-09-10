@@ -3,6 +3,7 @@
 namespace JustBetter\MagentoCustomerPrices\Actions;
 
 use Illuminate\Foundation\Bus\PendingDispatch;
+use JustBetter\MagentoClient\Client\Magento;
 use JustBetter\MagentoCustomerPrices\Contracts\ProcessesCustomerPrices;
 use JustBetter\MagentoCustomerPrices\Jobs\Retrieval\RetrieveCustomerPriceJob;
 use JustBetter\MagentoCustomerPrices\Jobs\Update\UpdateCustomerPriceJob;
@@ -11,6 +12,8 @@ use JustBetter\MagentoCustomerPrices\Repository\BaseRepository;
 
 class ProcessCustomerPrices implements ProcessesCustomerPrices
 {
+    public function __construct(protected Magento $magento) {}
+
     public function process(): void
     {
         $repository = BaseRepository::resolve();
@@ -21,6 +24,10 @@ class ProcessCustomerPrices implements ProcessesCustomerPrices
             ->select(['sku'])
             ->take($repository->retrieveLimit())
             ->each(fn (CustomerPrice $price): PendingDispatch => RetrieveCustomerPriceJob::dispatch($price->sku));
+
+        if (! $this->magento->available()) {
+            return;
+        }
 
         CustomerPrice::query()
             ->where('sync', '=', true)

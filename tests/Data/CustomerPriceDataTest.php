@@ -12,11 +12,11 @@ class CustomerPriceDataTest extends TestCase
     #[Test]
     public function it_passes_simple_rules(): void
     {
+        $this->expectNotToPerformAssertions();
+
         CustomerPriceData::of([
             'sku' => '::sku::',
         ]);
-
-        $this->assertTrue(true, 'No exception thrown');
     }
 
     #[Test]

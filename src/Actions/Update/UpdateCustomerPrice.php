@@ -39,6 +39,9 @@ class UpdateCustomerPrice implements UpdatesCustomerPrice
 
         $price->update([
             'update' => false,
+            'last_updated' => now(),
+            'fail_count' => 0,
+            'last_failed' => null,
         ]);
     }
 

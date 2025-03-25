@@ -36,6 +36,8 @@ class UpdateCustomerPriceTest extends TestCase
         /** @var CustomerPrice $model */
         $model = CustomerPrice::query()->create([
             'sku' => '::sku::',
+            'fail_count' => 1,
+            'last_failed' => now(),
             'prices' => [
                 [
                     'customer_id' => 1,
@@ -49,7 +51,12 @@ class UpdateCustomerPriceTest extends TestCase
         $action = app(UpdateCustomerPrice::class);
         $action->update($model);
 
-        $this->assertFalse($model->refresh()->update);
+        $model->refresh();
+
+        $this->assertFalse($model->update);
+        $this->assertNotNull($model->last_updated);
+        $this->assertEquals(0, $model->fail_count);
+        $this->assertNull($model->last_failed);
 
         Http::assertSent(function (Request $request): bool {
             return $request->data() === [
@@ -89,7 +96,10 @@ class UpdateCustomerPriceTest extends TestCase
         $action = app(UpdateCustomerPrice::class);
         $action->update($model);
 
-        $this->assertFalse($model->refresh()->update);
+        $model->refresh();
+
+        $this->assertFalse($model->update);
+        $this->assertNull($model->last_updated);
 
         Http::assertNothingSent();
     }

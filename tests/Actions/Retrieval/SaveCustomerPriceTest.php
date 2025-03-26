@@ -99,4 +99,32 @@ class SaveCustomerPriceTest extends TestCase
 
         $this->assertTrue($model->refresh()->update);
     }
+
+    #[Test]
+    public function it_does_not_reset_update_boolean(): void
+    {
+        $priceData = CustomerPriceData::of([
+            'sku' => '::sku::',
+            'prices' => [
+                [
+                    'customer_id' => 1,
+                    'price' => 10,
+                    'quantity' => 1,
+                ],
+            ],
+        ]);
+
+        /** @var SaveCustomerPrice $action */
+        $action = app(SaveCustomerPrice::class);
+        $action->save($priceData, false);
+
+        /** @var CustomerPrice $model */
+        $model = CustomerPrice::query()->firstWhere('sku', '=', '::sku::');
+
+        $this->assertTrue($model->update);
+
+        $action->save($priceData, false);
+
+        $this->assertTrue($model->refresh()->update);
+    }
 }

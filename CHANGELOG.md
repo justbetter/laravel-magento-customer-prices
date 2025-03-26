@@ -1,6 +1,14 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/3.2.1...main)
+[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/3.2.2...main)
+## [3.2.2](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/3.2.2) - 2025-03-26
+
+### What's Changed
+* Do not set update to false if it's currently true by @VincentBean in https://github.com/justbetter/laravel-magento-customer-prices/pull/17
+
+
+**Full Changelog**: https://github.com/justbetter/laravel-magento-customer-prices/compare/3.2.1...3.2.2
+
 ## [3.2.1](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/3.2.1) - 2025-03-25
 
 ### What's Changed

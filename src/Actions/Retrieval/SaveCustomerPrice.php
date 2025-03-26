@@ -21,7 +21,7 @@ class SaveCustomerPrice implements SavesCustomerPrice
         $model->retrieve = false;
         $model->last_retrieved = now();
 
-        $model->update = $forceUpdate || $model->checksum !== $customerPriceData->checksum();
+        $model->update = $forceUpdate || $model->checksum !== $customerPriceData->checksum() || $model->update;
         $model->checksum = $customerPriceData->checksum();
 
         $model->save();

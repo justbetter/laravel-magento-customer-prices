@@ -1,6 +1,14 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/3.2.2...main)
+[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/3.2.3...main)
+## [3.2.3](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/3.2.3) - 2025-06-11
+
+### What's Changed
+* Handle update failure by @VincentBean in https://github.com/justbetter/laravel-magento-customer-prices/pull/18
+
+
+**Full Changelog**: https://github.com/justbetter/laravel-magento-customer-prices/compare/3.2.2...3.2.3
+
 ## [3.2.2](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/3.2.2) - 2025-03-26
 
 ### What's Changed

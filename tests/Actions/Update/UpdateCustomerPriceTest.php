@@ -3,7 +3,6 @@
 namespace JustBetter\MagentoCustomerPrices\Tests\Actions\Update;
 
 use Illuminate\Http\Client\Request;
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use JustBetter\MagentoClient\Client\Magento;
 use JustBetter\MagentoCustomerPrices\Actions\Update\UpdateCustomerPrice;
@@ -105,7 +104,7 @@ class UpdateCustomerPriceTest extends TestCase
     }
 
     #[Test]
-    public function it_throws_exception_on_failure(): void
+    public function it_handles_failure(): void
     {
         $this->mock(ChecksMagentoExistence::class, function (MockInterface $mock): void {
             $mock->shouldReceive('exists')->andReturnTrue();
@@ -130,8 +129,10 @@ class UpdateCustomerPriceTest extends TestCase
         /** @var UpdateCustomerPrice $action */
         $action = app(UpdateCustomerPrice::class);
 
-        $this->expectException(RequestException::class);
-
         $action->update($model);
+
+        $model->refresh();
+        $this->assertEquals(1, $model->fail_count);
+        $this->assertNotNull($model->last_failed);
     }
 }

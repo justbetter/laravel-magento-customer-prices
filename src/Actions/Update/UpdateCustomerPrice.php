@@ -25,7 +25,7 @@ class UpdateCustomerPrice implements UpdatesCustomerPrice
             return;
         }
 
-        $this->magento->post('customer-pricing/'.urlencode($price->sku), [
+        $response = $this->magento->post('customer-pricing/'.urlencode($price->sku), [
             'customerPrices' => $price->prices,
         ])->onError(function (Response $response) use ($price): void {
             activity()
@@ -35,7 +35,13 @@ class UpdateCustomerPrice implements UpdatesCustomerPrice
                     'response' => $response->body(),
                 ])
                 ->log('Failed to update customer price');
-        })->throw();
+        });
+
+        if ($response->failed()) {
+            $price->registerFailure();
+
+            return;
+        }
 
         $price->update([
             'update' => false,

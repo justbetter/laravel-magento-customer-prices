@@ -22,7 +22,7 @@ class RetrieveCustomerPriceJob implements ShouldBeUnique, ShouldQueue
         public string $sku,
         public bool $forceUpdate = false
     ) {
-        $this->onQueue(config('magento-custmer-prices.queue'));
+        $this->onQueue(config('magento-customer-prices.queue'));
     }
 
     public function handle(RetrievesCustomerPrice $price): void

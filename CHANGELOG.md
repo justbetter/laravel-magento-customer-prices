@@ -1,6 +1,15 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/3.2.3...main)
+[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/3.2.4...main)
+## [3.2.4](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/3.2.4) - 2025-07-23
+
+### What's Changed
+* Update workflows by @VincentBean in https://github.com/justbetter/laravel-magento-customer-prices/pull/19
+* Fix queue name
+
+
+**Full Changelog**: https://github.com/justbetter/laravel-magento-customer-prices/compare/3.2.3...3.2.4
+
 ## [3.2.3](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/3.2.3) - 2025-06-11
 
 ### What's Changed

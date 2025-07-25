@@ -16,13 +16,15 @@ class RetrieveAllCustomerPricesJob implements ShouldBeUnique, ShouldQueue
     use InteractsWithQueue;
     use Queueable;
 
-    public function __construct(public ?Carbon $from = null)
-    {
+    public function __construct(
+        public ?Carbon $from = null,
+        public bool $defer = true,
+    ) {
         $this->onQueue(config('magento-customer-prices.queue'));
     }
 
     public function handle(RetrievesAllCustomerPrices $prices): void
     {
-        $prices->retrieve($this->from);
+        $prices->retrieve($this->from, $this->defer);
     }
 }

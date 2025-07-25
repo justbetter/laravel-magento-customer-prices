@@ -1,6 +1,14 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/3.2.4...main)
+[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/3.2.5...main)
+## [3.2.5](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/3.2.5) - 2025-07-25
+
+### What's Changed
+* Defer retrieving all by @ramonrietdijk in https://github.com/justbetter/laravel-magento-customer-prices/pull/20
+
+
+**Full Changelog**: https://github.com/justbetter/laravel-magento-customer-prices/compare/3.2.4...3.2.5
+
 ## [3.2.4](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/3.2.4) - 2025-07-23
 
 ### What's Changed

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Tests\Jobs\Retrieval;
 
 use JustBetter\MagentoCustomerPrices\Contracts\Retrieval\RetrievesCustomerPrice;
@@ -8,7 +10,7 @@ use JustBetter\MagentoCustomerPrices\Tests\TestCase;
 use Mockery\MockInterface;
 use PHPUnit\Framework\Attributes\Test;
 
-class RetrieveAllCustomerPricesJobTest extends TestCase
+final class RetrieveAllCustomerPricesJobTest extends TestCase
 {
     #[Test]
     public function it_calls_action(): void
@@ -25,7 +27,7 @@ class RetrieveAllCustomerPricesJobTest extends TestCase
     {
         $job = new RetrieveCustomerPriceJob('::sku::', false);
 
-        $this->assertEquals('::sku::', $job->uniqueId());
+        $this->assertSame('::sku::', $job->uniqueId());
     }
 
     #[Test]
@@ -33,6 +35,6 @@ class RetrieveAllCustomerPricesJobTest extends TestCase
     {
         $job = new RetrieveCustomerPriceJob('::sku::', false);
 
-        $this->assertEquals(['::sku::'], $job->tags());
+        $this->assertSame(['::sku::'], $job->tags());
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Tests\Jobs\Update;
 
 use JustBetter\MagentoCustomerPrices\Contracts\Update\UpdatesCustomerPrice;
@@ -9,7 +11,7 @@ use JustBetter\MagentoCustomerPrices\Tests\TestCase;
 use Mockery\MockInterface;
 use PHPUnit\Framework\Attributes\Test;
 
-class UpdateCustomerPriceJobTest extends TestCase
+final class UpdateCustomerPriceJobTest extends TestCase
 {
     #[Test]
     public function it_calls_action(): void
@@ -43,6 +45,6 @@ class UpdateCustomerPriceJobTest extends TestCase
 
         $job = new UpdateCustomerPriceJob($price);
 
-        $this->assertEquals(['::sku::'], $job->tags());
+        $this->assertSame(['::sku::'], $job->tags());
     }
 }

@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Tests\Actions\Update;
 
 use Illuminate\Http\Client\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use JustBetter\MagentoClient\Client\Magento;
 use JustBetter\MagentoCustomerPrices\Actions\Update\UpdateCustomerPrice;
@@ -12,7 +15,7 @@ use JustBetter\MagentoProducts\Contracts\ChecksMagentoExistence;
 use Mockery\MockInterface;
 use PHPUnit\Framework\Attributes\Test;
 
-class UpdateCustomerPriceTest extends TestCase
+final class UpdateCustomerPriceTest extends TestCase
 {
     protected function setUp(): void
     {
@@ -53,21 +56,19 @@ class UpdateCustomerPriceTest extends TestCase
         $model->refresh();
 
         $this->assertFalse($model->update);
-        $this->assertNotNull($model->last_updated);
+        $this->assertInstanceOf(Carbon::class, $model->last_updated);
         $this->assertEquals(0, $model->fail_count);
-        $this->assertNull($model->last_failed);
+        $this->assertNotInstanceOf(Carbon::class, $model->last_failed);
 
-        Http::assertSent(function (Request $request): bool {
-            return $request->data() === [
-                'customerPrices' => [
-                    [
-                        'customer_id' => 1,
-                        'price' => 10,
-                        'quantity' => 1,
-                    ],
+        Http::assertSent(fn (Request $request): bool => $request->data() === [
+            'customerPrices' => [
+                [
+                    'customer_id' => 1,
+                    'price' => 10,
+                    'quantity' => 1,
                 ],
-            ];
-        });
+            ],
+        ]);
     }
 
     #[Test]
@@ -98,7 +99,7 @@ class UpdateCustomerPriceTest extends TestCase
         $model->refresh();
 
         $this->assertFalse($model->update);
-        $this->assertNull($model->last_updated);
+        $this->assertNotInstanceOf(Carbon::class, $model->last_updated);
 
         Http::assertNothingSent();
     }
@@ -133,6 +134,6 @@ class UpdateCustomerPriceTest extends TestCase
 
         $model->refresh();
         $this->assertEquals(1, $model->fail_count);
-        $this->assertNotNull($model->last_failed);
+        $this->assertInstanceOf(Carbon::class, $model->last_failed);
     }
 }

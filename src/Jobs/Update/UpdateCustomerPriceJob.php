@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Jobs\Update;
 
 use Illuminate\Bus\Queueable;

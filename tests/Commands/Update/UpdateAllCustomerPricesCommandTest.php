@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Tests\Commands\Update;
 
 use Illuminate\Support\Facades\Bus;
@@ -10,7 +12,7 @@ use JustBetter\MagentoCustomerPrices\Tests\TestCase;
 use JustBetter\MagentoProducts\Models\MagentoProduct;
 use PHPUnit\Framework\Attributes\Test;
 
-class UpdateAllCustomerPricesCommandTest extends TestCase
+final class UpdateAllCustomerPricesCommandTest extends TestCase
 {
     #[Test]
     public function it_dispatches_jobs(): void

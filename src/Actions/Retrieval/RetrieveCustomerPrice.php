@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Actions\Retrieval;
 
 use JustBetter\MagentoCustomerPrices\Contracts\Retrieval\RetrievesCustomerPrice;
+use JustBetter\MagentoCustomerPrices\Data\CustomerPriceData;
 use JustBetter\MagentoCustomerPrices\Jobs\Retrieval\SaveCustomerPriceJob;
 use JustBetter\MagentoCustomerPrices\Models\CustomerPrice;
 use JustBetter\MagentoCustomerPrices\Repository\BaseRepository;
@@ -15,7 +18,7 @@ class RetrieveCustomerPrice implements RetrievesCustomerPrice
 
         $priceData = $repository->retrieve($sku);
 
-        if ($priceData === null) {
+        if (! $priceData instanceof CustomerPriceData) {
             CustomerPrice::query()
                 ->where('sku', '=', $sku)
                 ->update(['retrieve' => false]);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Tests\Data;
 
 use Illuminate\Validation\ValidationException;
@@ -7,7 +9,7 @@ use JustBetter\MagentoCustomerPrices\Data\CustomerPriceData;
 use JustBetter\MagentoCustomerPrices\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 
-class CustomerPriceDataTest extends TestCase
+final class CustomerPriceDataTest extends TestCase
 {
     #[Test]
     public function it_passes_simple_rules(): void
@@ -34,7 +36,7 @@ class CustomerPriceDataTest extends TestCase
             'sku' => '::sku::',
         ]);
 
-        $this->assertEquals('b5a9aed3556af7b01952f7fdcd28fdd8', $data->checksum());
+        $this->assertSame('b5a9aed3556af7b01952f7fdcd28fdd8', $data->checksum());
     }
 
     #[Test]
@@ -46,8 +48,8 @@ class CustomerPriceDataTest extends TestCase
 
         $data['prices'] = [];
 
-        $this->assertEquals([], $data['prices']);
-        $this->assertTrue(isset($data['prices']));
+        $this->assertSame([], $data['prices']);
+        $this->assertArrayHasKey('prices', $data);
         unset($data['prices']);
 
         $this->assertNull($data['prices']);

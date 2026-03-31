@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Tests\Fakes;
 
 use JustBetter\MagentoCustomerPrices\Data\CustomerPriceData;

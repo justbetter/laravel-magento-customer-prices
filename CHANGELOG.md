@@ -1,6 +1,14 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/3.2.5...main)
+[Unreleased changes](https://github.com/justbetter/laravel-magento-customer-prices/compare/3.3.0...main)
+## [3.3.0](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/3.3.0) - 2026-04-02
+
+### What's Changed
+* Laravel 13 support by @VincentBean in https://github.com/justbetter/laravel-magento-customer-prices/pull/21
+
+
+**Full Changelog**: https://github.com/justbetter/laravel-magento-customer-prices/compare/3.2.5...3.3.0
+
 ## [3.2.5](https://github.com/justbetter/laravel-magento-customer-prices/releases/tag/3.2.5) - 2025-07-25
 
 ### What's Changed

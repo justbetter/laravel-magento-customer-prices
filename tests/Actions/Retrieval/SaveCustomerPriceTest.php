@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Tests\Actions\Retrieval;
 
+use Illuminate\Support\Carbon;
 use JustBetter\MagentoCustomerPrices\Actions\Retrieval\SaveCustomerPrice;
 use JustBetter\MagentoCustomerPrices\Data\CustomerPriceData;
 use JustBetter\MagentoCustomerPrices\Models\CustomerPrice;
 use JustBetter\MagentoCustomerPrices\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 
-class SaveCustomerPriceTest extends TestCase
+final class SaveCustomerPriceTest extends TestCase
 {
     #[Test]
     public function it_saves_fields(): void
@@ -36,7 +39,7 @@ class SaveCustomerPriceTest extends TestCase
         $this->assertTrue($model->sync);
         $this->assertFalse($model->retrieve);
         $this->assertTrue($model->update);
-        $this->assertNotNull($model->last_retrieved);
+        $this->assertInstanceOf(Carbon::class, $model->last_retrieved);
         $this->assertEquals('b7330ec7904538aab484f89e78efe836', $model->checksum);
     }
 

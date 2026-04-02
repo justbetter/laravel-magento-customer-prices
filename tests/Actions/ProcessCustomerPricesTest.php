@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Tests\Actions;
 
 use Illuminate\Support\Facades\Bus;
@@ -12,7 +14,7 @@ use JustBetter\MagentoCustomerPrices\Tests\TestCase;
 use Mockery\MockInterface;
 use PHPUnit\Framework\Attributes\Test;
 
-class ProcessCustomerPricesTest extends TestCase
+final class ProcessCustomerPricesTest extends TestCase
 {
     #[Test]
     public function it_dispatches_retrieval_jobs(): void

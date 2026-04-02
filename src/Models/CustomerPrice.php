@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -44,9 +46,10 @@ class CustomerPrice extends Model
         'last_failed' => 'datetime',
     ];
 
-    public static function booted(): void
+    #[\Override]
+    protected static function booted(): void
     {
-        static::updating(function (self $model) {
+        static::updating(function (self $model): void {
             if ($model->update && $model->retrieve) {
                 if (! $model->isDirty(['retrieve'])) {
                     $model->retrieve = false;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Tests\Jobs\Retrieval;
 
 use JustBetter\MagentoCustomerPrices\Contracts\Retrieval\RetrievesAllCustomerPrices;
@@ -8,7 +10,7 @@ use JustBetter\MagentoCustomerPrices\Tests\TestCase;
 use Mockery\MockInterface;
 use PHPUnit\Framework\Attributes\Test;
 
-class RetrieveCustomerPriceJobTest extends TestCase
+final class RetrieveCustomerPriceJobTest extends TestCase
 {
     #[Test]
     public function it_calls_action(): void

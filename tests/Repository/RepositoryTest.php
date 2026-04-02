@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Tests\Repository;
 
 use JustBetter\MagentoCustomerPrices\Exceptions\NotImplementedException;
@@ -10,7 +12,7 @@ use JustBetter\MagentoCustomerPrices\Tests\TestCase;
 use JustBetter\MagentoProducts\Models\MagentoProduct;
 use PHPUnit\Framework\Attributes\Test;
 
-class RepositoryTest extends TestCase
+final class RepositoryTest extends TestCase
 {
     #[Test]
     public function getters(): void

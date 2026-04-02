@@ -1,7 +1,9 @@
 <?php
 
+use JustBetter\MagentoCustomerPrices\Repository\Repository;
+
 return [
-    'repository' => \JustBetter\MagentoCustomerPrices\Repository\Repository::class,
+    'repository' => Repository::class,
 
     /* Queue for the jobs to run on */
     'queue' => 'default',

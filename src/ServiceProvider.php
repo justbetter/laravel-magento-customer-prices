@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
@@ -16,6 +18,7 @@ use JustBetter\MagentoCustomerPrices\Commands\Update\UpdateCustomerPriceCommand;
 
 class ServiceProvider extends BaseServiceProvider
 {
+    #[\Override]
     public function register(): void
     {
         $this

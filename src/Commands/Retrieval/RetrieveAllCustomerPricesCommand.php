@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Commands\Retrieval;
 
 use Illuminate\Console\Command;
@@ -17,7 +19,6 @@ class RetrieveAllCustomerPricesCommand extends Command
         /** @var ?string $from */
         $from = $this->argument('from');
 
-        /** @var bool $defer */
         $defer = ! $this->option('queue');
 
         $carbon = blank($from) ? null : Carbon::parse($from);

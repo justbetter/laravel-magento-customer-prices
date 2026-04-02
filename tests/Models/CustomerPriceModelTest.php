@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustBetter\MagentoCustomerPrices\Tests\Models;
 
+use Illuminate\Support\Carbon;
 use JustBetter\MagentoCustomerPrices\Models\CustomerPrice;
 use JustBetter\MagentoCustomerPrices\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 
-class CustomerPriceModelTest extends TestCase
+final class CustomerPriceModelTest extends TestCase
 {
     #[Test]
     public function it_can_register_failures(): void
@@ -19,7 +22,7 @@ class CustomerPriceModelTest extends TestCase
 
         $model->registerFailure();
 
-        $this->assertNotNull($model->last_failed);
+        $this->assertInstanceOf(Carbon::class, $model->last_failed);
         $this->assertEquals(1, $model->fail_count);
         $this->assertTrue($model->update);
     }
